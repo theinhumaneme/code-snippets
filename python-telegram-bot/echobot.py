@@ -1,5 +1,4 @@
 import logging
-from typing import Text
 from telegram import Bot
 from telegram.ext import Updater,CommandHandler,MessageHandler,Filters
 
