@@ -1,6 +1,5 @@
 import logging
 import random
-from click import command
 from telegram import Bot, InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import (
     CommandHandler,
@@ -67,7 +66,7 @@ main_options = [
     [InlineKeyboardButton(text="All", callback_data="all")],
 ]
 
-playist_option = [
+playlist_option = [
     [InlineKeyboardButton(text="Playlist 1", callback_data='0')],
     [InlineKeyboardButton(text="Playlist 2", callback_data='1')],
     [InlineKeyboardButton(text="Playlist 3", callback_data='2')],
@@ -75,7 +74,7 @@ playist_option = [
 
 main_options_markup = InlineKeyboardMarkup(main_options)
 
-playist_option_markup = InlineKeyboardMarkup(playist_option)
+playlist_option_markup = InlineKeyboardMarkup(playlist_option)
 
 
 def file_id_command(update, context):
@@ -109,13 +108,13 @@ def options_choice(update, context):
     if option.data == "random":
         option.edit_message_text(
             text="Choose a playlist\n",
-            reply_markup=playist_option_markup,
+            reply_markup=playlist_option_markup,
         )
         return playlist_choice
     if option.data == "shuffle":
         option.edit_message_text(
             text="Choose a playlist\n",
-            reply_markup=playist_option_markup,
+            reply_markup=playlist_option_markup,
         )
         return playlist_choice
     if option.data == "random_shuffle":
@@ -155,14 +154,6 @@ def user_req(update, context):
 
 
 def send_songs(update, context):
-    """Send songs to user, depending on the option,playlist and option
-
-    Args:
-        update (_type_): Telegram update class
-        option (str): random / shuffle / random_shuffle / all
-        number (int): No of songs to be sent
-
-    """
     if (
         data[update.effective_user.id]["option"] == "random"
         or data[update.effective_user.id]["option"] == "shuffle"
